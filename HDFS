@@ -1,0 +1,93 @@
+hduser@bmsce-Precision-T1700:~$ start-all.sh
+This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh
+Starting namenodes on [localhost]
+hduser@localhost's password: 
+localhost: starting namenode, logging to /usr/local/hadoop/logs/hadoop-hduser-namenode-bmsce-Precision-T1700.out
+hduser@localhost's password: 
+localhost: starting datanode, logging to /usr/local/hadoop/logs/hadoop-hduser-datanode-bmsce-Precision-T1700.out
+Starting secondary namenodes [0.0.0.0]
+hduser@0.0.0.0's password: 
+0.0.0.0: starting secondarynamenode, logging to /usr/local/hadoop/logs/hadoop-hduser-secondarynamenode-bmsce-Precision-T1700.out
+starting yarn daemons
+starting resourcemanager, logging to /usr/local/hadoop/logs/yarn-hduser-resourcemanager-bmsce-Precision-T1700.out
+hduser@localhost's password: 
+localhost: starting nodemanager, logging to /usr/local/hadoop/logs/yarn-hduser-nodemanager-bmsce-Precision-T1700.out
+hduser@bmsce-Precision-T1700:~$ jps
+4563 SecondaryNameNode
+3557 DataNode
+5878 Jps
+3305 NameNode
+4763 ResourceManager
+5101 NodeManager
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -mkdir /bmsce
+
+hduser@bmsce-Precision-T1700:~$ ls
+ 1BM18CS035         file23.txt                                     pt
+ alterfile.txt      hadoop-2.6.0.tar.gz                            PT72Installer
+ command.class      hive                                           Public
+ command.java       inheritance.java                               R
+ derby.log          lab2.txt                                       ron
+ Desktop            lab3.txt                                       Templates
+ Documents          metastore_db                                   toinstalledlist
+ downloads          Music                                          Videos
+ Downloads         'Packet Tracer 7.2.1 for Linux 64 bit.tar.gz'   xyz.txt
+ examples.desktop   Pictures
+ file1.txt          pig_1564816082257.log
+
+hduser@bmsce-Precision-T1700:~$ hadoop fs -ls /
+Found 10 items
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 15:19 /FFF
+drwxr-xr-x   - hduser supergroup          0 2022-06-04 09:27 /bmsce
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:16 /ddd
+drwxr-xr-x   - hduser supergroup          0 2022-05-31 09:45 /ff
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 15:22 /j
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:45 /shyam
+drwxr-xr-x   - hduser supergroup          0 2022-05-31 09:57 /ss
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:36 /sss
+drwxrwxr-x   - hduser supergroup          0 2019-08-01 16:19 /tmp
+drwxr-xr-x   - hduser supergroup          0 2019-08-01 16:03 /user
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -put /home/hduser/Desktop/xyz.txt /bmsce/WC.txt
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /bmsce/WC.txt
+Hello My name is Vidhi
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -copyFromLocal /home/hduser/Desktop/xyz.txt /bmsce/WC1.txt
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /bmsce/WC1.txt
+Hello My name is Vidhi
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -get /bmsce/WC.txt /home/hduser/Downloads/WWC1.txt
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -getmerge /bmsce/WC.txt /bmsce/WC1.txt /home/hduser/Desktop/Merge.txt
+
+hduser@bmsce-Precision-T1700:~$ hadoop fs -getfacl /bmsce/
+# file: /bmsce
+# owner: hduser
+# group: supergroup
+user::rwx
+group::r-x
+other::r-x
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -copyToLocal /bmsce/WC.txt /home/hduser/Desktop
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /bmsce/WC.txt
+Hello My name is Vidhi
+
+hduser@bmsce-Precision-T1700:~$ hadoop fs -mv /bmsce /FFF
+
+hduser@bmsce-Precision-T1700:~$ hadoop fs -ls /FFF
+Found 4 items
+-rw-r--r--   1 hduser supergroup          0 2022-06-01 09:40 /FFF/WC.txt
+drwxr-xr-x   - hduser supergroup          0 2022-06-04 09:38 /FFF/bmsce
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 14:56 /FFF/ronaldo
+-rw-r--r--   1 hduser supergroup         24 2022-06-01 09:45 /FFF/xyz.txt
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -put /home/hduser/Desktop/file1.txt /FFF/file2.txt
+
+hduser@bmsce-Precision-T1700:~$ hadoop fs -cp /FFF/file2.txt  /bmsce
+
+hduser@bmsce-Precision-T1700:~$ hadoop fs -ls /bmsce
+-rw-r--r--   1 hduser supergroup         10 2022-06-04 10:14 /bmsce
+hduser@bmsce-Precision-T1700:~$ 
